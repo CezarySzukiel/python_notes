@@ -140,47 +140,77 @@ from time import sleep
 
 # calculate_magic = memoize()
 
-def calculate_magic(a, b):
-    # jakieś intensive CPU task
-    sleep(3)
-    return a + b
+# def calculate_magic(a, b):
+#     # jakieś intensive CPU task
+#     sleep(3)
+#     return a + b
+#
+# def calculate
+#
+# print(calculate_magic(1, 2))
+# print(calculate_magic(2, 2))
+# print(calculate_magic(1, 2))
+# print(calculate_magic(2, 2))
+#
+#
+# def memoize(cb):
+#     cache = {}
+#
+#     def inner(*args):
+#         if args not in cache:
+#             cache[args] = cb(*args)
+#         return cache[args]
+#
+#     return inner
+#
+#
+# def calculate_magic(a, b, /):
+#     # intensive CPU task
+#     sleep(3)
+#     return a + b
+#
+#
+# def calculate_tribonacci(a, b, c, /):
+#     # intensive CPU task
+#     sleep(3)
+#     return a + b + c
+#
+#
+# calculate_magic_cache = memoize(calculate_magic)
+# calculate_tribonacci_cache = memoize(calculate_tribonacci)
+#
+# print(calculate_magic_cache(1, 2))
+# print(calculate_magic_cache(2, 2))
+# print(calculate_magic_cache(1, 2))
+# print(calculate_magic_cache(2, 2))
+# print(calculate_tribonacci_cache(2, 2, 2))
 
-def calculate
+### 10 ** 2
 
-print(calculate_magic(1, 2))
-print(calculate_magic(2, 2))
-print(calculate_magic(1, 2))
-print(calculate_magic(2, 2))
+def power_10(base):
+    return base ** 10
 
 
-def memoize(cb):
-    cache = {}
+# def power_n(base, exponent):
+#     return base ** exponent
 
-    def inner(*args):
-        if args not in cache:
-            cache[args] = cb(*args)
-        return cache[args]
+
+# print(power)10(2))
+
+# factory function (factory design pattern)
+def power_n(exponent):
+    def inner(base):
+        return base ** exponent
 
     return inner
 
 
-def calculate_magic(a, b, /):
-    # intensive CPU task
-    sleep(3)
-    return a + b
+power_2 = power_n(2)
+power_3 = power_n(3)
+power_4 = power_n(4)
 
+print(power_2(2))  # 4
+print(power_2(4))  # 16
+print(power_3(2))  # 8
+print(power_3(4))  # 64
 
-def calculate_tribonacci(a, b, c, /):
-    # intensive CPU task
-    sleep(3)
-    return a + b + c
-
-
-calculate_magic_cache = memoize(calculate_magic)
-calculate_tribonacci_cache = memoize(calculate_tribonacci)
-
-print(calculate_magic_cache(1, 2))
-print(calculate_magic_cache(2, 2))
-print(calculate_magic_cache(1, 2))
-print(calculate_magic_cache(2, 2))
-print(calculate_tribonacci_cache(2, 2, 2))
