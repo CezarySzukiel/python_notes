@@ -43,7 +43,28 @@ assert make_negative(-1) == -1
 assert make_negative(0) == 0
 assert make_negative(1) == -1
 
+
+def pipe_fix(nums):
+    return [i for i in range(nums[0], nums[-1] + 1)]
+
+
+assert pipe_fix([-1, 4]) == [-1, 0, 1, 2, 3, 4]
+assert pipe_fix([1, 5]) == [1, 2, 3, 4, 5]
+
+
+def goals(laLiga, copaDelRey, championsLeague):
+    return laLiga + copaDelRey + championsLeague
+
+
+assert goals(5, 5, 5) == 15
+
+
+def move(position, roll):
+    return position + roll * 2
+
+
+assert move(3, 6) == 15
+
 if __name__ == "__main__":
     file_path = 'functions_homework.py'
     print(f"Number of functions in {file_path}: {count_functions_in_file(file_path)}")
-
