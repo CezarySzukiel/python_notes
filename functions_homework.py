@@ -140,12 +140,14 @@ assert memoized(4) == 16
 
 def fibonacci_generator():
     fibs = [0, 0]
+
     def fibonacci_first():
         result = fibs[-1] + fibs[-2]
         fibs.append(result)
         if result == 0:
             fibs[1] += 1
         return result
+
     return fibonacci_first
 
 
@@ -157,7 +159,192 @@ assert fib() == 1
 assert fib() == 2
 assert fib() == 3
 assert fib() == 5
-assert fib() == 8
+
+
+def some_function(x):
+    return f'processing {x}'
+
+
+assert some_function(5) == 'processing 5'
+
+
+def rate_limiter(function, limit=3):
+    usage = 0
+
+    def call_with_limit(*args):
+        nonlocal usage
+        if usage < limit:
+            usage += 1
+            return function(*args)
+        return f'limit {limit} exceeded'
+    return call_with_limit
+
+
+limited_function = rate_limiter(some_function, limit=2)
+
+assert limited_function(42) == 'processing 42'
+assert limited_function(42) == 'processing 42'
+assert limited_function(42) == 'limit 2 exceeded'
+
+
+def char_counter():
+    summary_text = ''
+
+    def char_updater(text):
+        nonlocal summary_text
+        summary_text = summary_text + text
+        return len(summary_text)
+
+    return char_updater
+
+
+text_1_len = char_counter()
+
+assert text_1_len('Ala ma kota') == 11
+assert text_1_len(' i wszy') == 18
+
+
+def total_sum():
+    cache = []
+
+    def sum_nums(number):
+        cache.append(number)
+        return sum(cache)
+
+    return sum_nums
+
+
+summary = total_sum()
+
+assert summary(5) == 5
+assert summary(5) == 10
+assert summary(5) == 15
+
+
+def total_average():
+    cache = []
+
+    def updater(*args):
+        cache.extend(args)
+        return round(sum(cache) / len(cache), 1)
+
+    return updater
+
+
+average = total_average()
+
+assert average(5, 5, 5) == 5
+assert average(1, 2, 3, 4) == 3.6
+
+
+def list_cache():
+    cache = []
+
+    def updater(*args):
+        cache.extend(args)
+        return cache
+
+    return updater
+
+
+my_list = list_cache()
+
+assert my_list(1) == [1]
+assert my_list(2, 3, 4, 5) == [1, 2, 3, 4, 5]
+
+
+def switcher():
+    state = False
+
+    def updater():
+        nonlocal state
+        state = not state
+        return state
+
+    return updater
+
+
+switch = switcher()
+
+assert switch()
+assert not switch()
+
+
+def power(x):
+    def inner(n):
+        return x ** n
+
+    return inner
+
+
+two_to_power = power(2)
+assert two_to_power(2) == 4
+assert two_to_power(3) == 8
+
+
+def keys_counter():
+    cache = {}
+
+    def updater(key):
+        if not key in cache:
+            cache.update({key: 1})
+        else:
+            cache[key] += 1
+        return cache[key]
+
+    return updater
+
+
+count_key = keys_counter()
+
+assert count_key("a") == 1
+assert count_key("b") == 1
+assert count_key("a") == 2
+assert count_key("a") == 3
+
+
+def reverse_(text):
+    def inner():
+        return text[::-1]
+
+    return inner
+
+
+reversed_Ola = reverse_("Ola")
+
+assert reversed_Ola() == "alO"
+
+
+def step_counter(steps_limit=10):
+    position = 0
+
+    def counter(steps):
+        nonlocal position
+        position += min(steps, steps_limit)
+        return position
+
+    return counter
+
+
+move = step_counter()
+
+assert move(5) == 5
+assert move(11) == 15
+assert move(10) == 25
+
+
+def call_history():
+    cache = []
+
+    def inner(*args):
+        [cache.append(i) for i in args]
+        return cache
+    return inner
+
+history = call_history()
+
+assert history(1, 3, 5) == [1, 3, 5]
+assert history(2, 4, 6) == [1, 3, 5, 2, 4, 6]
 
 
 if __name__ == "__main__":
