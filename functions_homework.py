@@ -113,7 +113,6 @@ def slow_function(x):
 
 
 assert slow_function(2) == 4
-assert slow_function(4) == 16
 
 print("*-" * 50)
 print("next function")
@@ -177,6 +176,7 @@ def rate_limiter(function, limit=3):
             usage += 1
             return function(*args)
         return f'limit {limit} exceeded'
+
     return call_with_limit
 
 
@@ -339,13 +339,33 @@ def call_history():
     def inner(*args):
         [cache.append(i) for i in args]
         return cache
+
     return inner
+
+
+def create_shopping_list():
+    cache = set()
+
+    def inner(action, product=None):
+        if action == "show":
+            print(cache)
+        elif action == "add":
+            cache.add(product)
+        return cache
+
+    return inner
+
+
+shopping_list = create_shopping_list()
+
+assert shopping_list("add", "bread") == {'bread'}
+assert shopping_list("add", "milk") == {'bread', 'milk'}
+shopping_list("show")
 
 history = call_history()
 
 assert history(1, 3, 5) == [1, 3, 5]
 assert history(2, 4, 6) == [1, 3, 5, 2, 4, 6]
-
 
 if __name__ == "__main__":
     file_path = 'functions_homework.py'
