@@ -367,6 +367,31 @@ history = call_history()
 assert history(1, 3, 5) == [1, 3, 5]
 assert history(2, 4, 6) == [1, 3, 5, 2, 4, 6]
 
+
+def validate_positive(func):
+    def validator(*args):
+        for i in args:
+            if i < 0:
+                return ValueError("argument, can't be less than zero")
+            elif type(i) is not int:
+                return ValueError("argument must be integer")
+        return func(*args)
+
+    return validator
+
+
+@validate_positive
+def add_numbers(a, b):
+    return a + b
+
+
+assert add_numbers(3, 5) == 8
+try:
+    add_numbers(-1, 5)
+except ValueError as e:
+    assert str(e) == "argument, can't be less than zero"
+
+
 if __name__ == "__main__":
     file_path = 'functions_homework.py'
     print(f"Number of functions in {file_path}: {count_functions_in_file(file_path)}")
