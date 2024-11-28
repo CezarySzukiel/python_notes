@@ -392,6 +392,24 @@ except ValueError as e:
     assert str(e) == "argument, can't be less than zero"
 
 
+def create_vowel_counter():
+    vowels = ["a", "e", "i", "o", "u", "y", "ą", "ę"]
+    counter = 0
+
+    def vowel_counter(text):
+        nonlocal counter
+        counter += len([i for i in text if i.lower() in vowels])
+        return counter
+
+    return vowel_counter
+
+
+vowel_counter = create_vowel_counter()
+
+assert vowel_counter("hello") == 2
+assert vowel_counter("ala") == 4
+assert vowel_counter("Pythonista") == 8
+
 if __name__ == "__main__":
     file_path = 'functions_homework.py'
     print(f"Number of functions in {file_path}: {count_functions_in_file(file_path)}")
