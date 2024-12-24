@@ -410,6 +410,31 @@ assert vowel_counter("hello") == 2
 assert vowel_counter("ala") == 4
 assert vowel_counter("Pythonista") == 8
 
+a = lambda x, y, z: (x + y) / z
+
+
+def proportion_from_width(start_width: int, start_height: int, range_start: int, range_stop: int, range_step: int = 1) -> dict:
+    """
+    Function returns dictionary with proportions of height to width in range of width
+    :param start_width: actual width of element
+    :param start_height: actual height of element
+    :param range_start: begin of range of width you want to calculate
+    :param range_stop: end of range of width you want to calculate
+    :param range_step: step of range of width you want to calculate
+    :return: dict with proportions of height to width
+    """
+    result = {}
+    for width in range(range_start, range_stop, range_step):
+        height = (width * start_height) / start_width
+        result.update({width: height})
+    return result
+
+width=100
+height=50
+assert proportion_from_width(width, height, 100, 200, 10) == {100: 50.0, 110: 55.0, 120: 60.0, 130: 65.0, 140: 70.0, 150: 75.0, 160: 80.0, 170: 85.0, 180: 90.0, 190: 95.0}
+
+assert a(1, 2, 3) == 1.0
+
 if __name__ == "__main__":
     file_path = 'functions_homework.py'
     print(f"Number of functions in {file_path}: {count_functions_in_file(file_path)}")
