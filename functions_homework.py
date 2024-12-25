@@ -411,9 +411,11 @@ assert vowel_counter("ala") == 4
 assert vowel_counter("Pythonista") == 8
 
 a = lambda x, y, z: (x + y) / z
+assert a(1, 2, 3) == 1.0
 
 
-def proportion_from_width(start_width: int, start_height: int, range_start: int, range_stop: int, range_step: int = 1) -> dict:
+def proportion_from_width(start_width: int, start_height: int, range_start: int, range_stop: int,
+                          range_step: int = 1) -> dict:
     """
     Function returns dictionary with proportions of height to width in range of width
     :param start_width: actual width of element
@@ -424,16 +426,36 @@ def proportion_from_width(start_width: int, start_height: int, range_start: int,
     :return: dict with proportions of height to width
     """
     result = {}
-    for width in range(range_start, range_stop, range_step):
-        height = (width * start_height) / start_width
-        result.update({width: height})
+    for wdth in range(range_start, range_stop, range_step):
+        hgh = (wdth * start_height) / start_width
+        result.update({wdth: hgh})
     return result
 
-width=100
-height=50
-assert proportion_from_width(width, height, 100, 200, 10) == {100: 50.0, 110: 55.0, 120: 60.0, 130: 65.0, 140: 70.0, 150: 75.0, 160: 80.0, 170: 85.0, 180: 90.0, 190: 95.0}
 
-assert a(1, 2, 3) == 1.0
+width = 100
+height = 50
+assert proportion_from_width(width, height, 100, 200, 10) == {100: 50.0, 110: 55.0, 120: 60.0, 130: 65.0, 140: 70.0,
+                                                              150: 75.0, 160: 80.0, 170: 85.0, 180: 90.0, 190: 95.0}
+
+
+def create_data_between(start: int | float, end: int | float, number_of_el: int) -> list[int | float]:
+    """
+    Function returns list of numbers between start and end with number_of_el elements with equal step
+    :param start: lower value of range
+    :param end: higher value of range
+    :param number_of_el: number of result elements including start and end
+    :return: list of numbers between start and end including start and end
+    """
+    result_lst: list[int | float] = []
+    step = (end - start) / number_of_el
+    for i in range(number_of_el):
+        result_lst.append(start)
+        start += step
+
+    return result_lst
+
+
+assert create_data_between(0, 1000, 5) == [0, 200.0, 400.0, 600.0, 800.0]
 
 if __name__ == "__main__":
     file_path = 'functions_homework.py'
