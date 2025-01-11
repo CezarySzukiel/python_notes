@@ -1,6 +1,6 @@
 .venv
 .idea
 .ipynb_checkpoints
-
+.DS_Store
 hello.html
 bye.html
