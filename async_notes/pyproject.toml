@@ -1,0 +1,46 @@
+[project]
+name = "async-notes"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "aiohttp>=3.11.12",
+    "asyncpg>=0.30.0",
+    "flask>=3.1.0",
+    "gunicorn>=23.0.0",
+    "mypy>=1.15.0",
+    "psycopg2-binary>=2.9.10",
+    "requests>=2.32.3",
+    "ruff>=0.9.7",
+    "starlette>=0.46.0",
+    "uvicorn>=0.34.0",
+]
+
+[tool.mypy]
+disallow_untyped_defs = true
+disallow_untyped_calls = true
+disallow_incomplete_defs = true
+disallow_subclassing_any = true
+warn_return_any = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unused_configs = true
+no_implicit_optional = true
+
+
+line-length = 120
+target-version = 'py313'
+fix = false
+include = [
+    "conftest/**/*.py",
+    "src/**/*.py",
+    "tests/**/*.py"
+]
+
+[lint]
+
+[dependency-groups]
+dev = [
+    "types-requests>=2.32.0.20241016",
+]
