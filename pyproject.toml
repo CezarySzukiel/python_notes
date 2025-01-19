@@ -7,6 +7,8 @@ authors = ["CezarySzukiel <cezary.szukiel@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.10"
 tomli = "^2.2.1"
+numpy = "^2.2.1"
+pandas = "^2.2.3"
 
 [tool.poetry.dev-dependencies]
 mypy = "1.14.1"
