@@ -47,7 +47,7 @@ import sys
 sys.set_int_max_str_digits(1000000)
 
 
-# print(len(f'{tramp(ft, 100000)}'))
+print(len(f'{tramp(ft, 100000)}'))
 
 # napisz fn do usuwania znaków
 # 'ala ma kota!?' -> !? -> ala ma kota
